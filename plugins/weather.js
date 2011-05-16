@@ -2,31 +2,18 @@ var http = require('http'),
     util = require('util'),
     jsdom = require('jsdom');
 
-/*var Weather = function (location) {
-	this.current = current(location);
-	this.forcast = forcast(location);
-};
-
-exports.Weather = Weather;
-
-Weather.prototype.commands = {
-	'weather': 'current',
-	'forecast': 'forecast'
-};*/
-
 exports.current = function(location) {
-	var promise = new task.Promise();
+	var a = "";
 	query(location, function (contents) {
 		var body, reply = [];
 		try {
 			body = getDom(contents);
 		} catch (e) {
-			promise.resolve('Could not fetch weather data.');
-			return;
+			return 'Could not fetch weather data.';
 		}
 		var city = body.getElementsByTagName('city')[0];
 		if (!city || !city.getAttribute) {
-			return promise.resolve('No city -> no weather.');
+			return 'No city -> no weather.';
 		}
 		reply.push('Weather for ' + city.getAttribute('data'));
 		var currentCondition = body.getElementsByTagName('current_conditions')[0];
@@ -37,20 +24,20 @@ exports.current = function(location) {
 		reply.push('Current conditions: ' + conditions.getAttribute('data') + 
 				   ' ' + temp.getAttribute('data') + 'ºc');
 		reply.push(humidity.getAttribute('data'));
-		promise.resolve(reply.join("\n"));
+		a = reply.join("\n");
 	});
-	return promise;
+	return a;
 }
 
+
 exports.forecast = function(location) {
-	var promise = new task.Promise();
+	var a = "";
 	query(location, function (contents) {
 		var body, reply = [];
 		try {
 			body = getDom(contents);
 		} catch (e) {
-			promise.resolve('Could not fetch weather data.');
-			return;
+			return 'Could not fetch weather data.';
 		}
 		var forecast = Array.prototype.slice.call(body.getElementsByTagName('forecast_conditions'));
 
@@ -63,9 +50,9 @@ exports.forecast = function(location) {
 			text = day + ' ' + condition + ' high of: ' + convertTemp(high) + ' low of: ' + convertTemp(low);
 			reply.push(text);
 		});
-		promise.resolve(reply.join("\n"));
+		a = reply.join("\n");
 	});
-	return promise;
+	return a;
 };
 
 function convertTemp(faren) {
