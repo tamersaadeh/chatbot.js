@@ -2,18 +2,19 @@ var http = require('http'),
     util = require('util'),
     jsdom = require('jsdom');
 
-var Weather = function () {
-	
+/*var Weather = function (location) {
+	this.current = current(location);
+	this.forcast = forcast(location);
 };
 
 exports.Weather = Weather;
 
-/*Weather.prototype.commands = {
+Weather.prototype.commands = {
 	'weather': 'current',
 	'forecast': 'forecast'
 };*/
 
-Weather.prototype.current = function (location) {
+exports.current = function(location) {
 	var promise = new task.Promise();
 	query(location, function (contents) {
 		var body, reply = [];
@@ -39,10 +40,9 @@ Weather.prototype.current = function (location) {
 		promise.resolve(reply.join("\n"));
 	});
 	return promise;
-};
+}
 
-
-Weather.prototype.forecast = function (location) {
+exports.forecast = function(location) {
 	var promise = new task.Promise();
 	query(location, function (contents) {
 		var body, reply = [];

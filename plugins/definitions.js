@@ -3,13 +3,13 @@ var sys = require('util'),
 
 exports.events = [];
 
-var Definitions = function () {
-	
+/*var Definitions = function (from, content) {
+	this.define = define(from, content);
 };
 
-exports.Definitions = Definitions;
+exports.Definitions = Definitions;*/
 
-Definitions.prototype.define = function(from, content) {
+exports.define = function (from, content) {
 	var that = this;
 	var res = /^def\s(.+)$/.exec(content);
 	if (res !== null) {
