@@ -2,8 +2,9 @@ var http = require('http'),
     util = require('util'),
     jsdom = require('jsdom');
 
+var c,f;
+
 exports.current = function(location) {
-	var a = "";
 	query(location, function (contents) {
 		var body, reply = [];
 		try {
@@ -11,6 +12,7 @@ exports.current = function(location) {
 		} catch (e) {
 			return 'Could not fetch weather data.';
 		}
+		console.log(body);
 		var city = body.getElementsByTagName('city')[0];
 		if (!city || !city.getAttribute) {
 			return 'No city -> no weather.';
@@ -24,14 +26,14 @@ exports.current = function(location) {
 		reply.push('Current conditions: ' + conditions.getAttribute('data') + 
 				   ' ' + temp.getAttribute('data') + 'ºc');
 		reply.push(humidity.getAttribute('data'));
-		a = reply.join("\n");
+		return reply.join("\n");
 	});
+	console.log("\na: "+a);
 	return a;
 }
 
 
 exports.forecast = function(location) {
-	var a = "";
 	query(location, function (contents) {
 		var body, reply = [];
 		try {
@@ -39,6 +41,7 @@ exports.forecast = function(location) {
 		} catch (e) {
 			return 'Could not fetch weather data.';
 		}
+		console.log(body);
 		var forecast = Array.prototype.slice.call(body.getElementsByTagName('forecast_conditions'));
 
 		forecast.forEach(function (element) {
@@ -50,9 +53,11 @@ exports.forecast = function(location) {
 			text = day + ' ' + condition + ' high of: ' + convertTemp(high) + ' low of: ' + convertTemp(low);
 			reply.push(text);
 		});
-		a = reply.join("\n");
+		f = reply.join("\n");
+		//return a;
 	});
-	return a;
+	console.log("\nf: "+f);
+	return f;
 };
 
 function convertTemp(faren) {
@@ -68,6 +73,7 @@ function getDom(contents) {
 }
 
 function query(location, callback) {
+	console.log("\nquery: "+location);
 	var options = {
 		host: 'www.google.com',
 		path: '/ig/api?weather=' + encodeURIComponent(location.trim()),

@@ -1,11 +1,8 @@
 var http = require('http'),
     url = require('url'),
-    w = require('./plugins/weather.js'),
-    d = require('./plugins/definitions.js');
+    weather = require('./plugins/weather.js'),
+    def = require('./plugins/definitions.js');
 var data;
-
-var weather = w;
-var def = d;
 
 function chat(res, d) {
 	data = d;
@@ -13,9 +10,9 @@ function chat(res, d) {
 		var msg = getQuery('msg');
 		switch(msg) {
 		case "weather":
-			res.end(weather.current("Washington, DC"));break;
+			res.end(weather.current("Washington,DC"));break;
 		case "forcast":
-			res.end(weather.forecast("Washington, DC"));break;
+			res.end(weather.forecast("Washington,DC"));break;
 		case "def":
 			res.end(def.define("Google"));break;
 		case "definition":
