@@ -1,7 +1,6 @@
-var task = require('./task'),
-	http = require('http'),
-	util = require('util'),
-	jsdom = require('jsdom');
+var http = require('http'),
+    util = require('util'),
+    jsdom = require('jsdom');
 
 var Weather = function () {
 	
@@ -9,10 +8,10 @@ var Weather = function () {
 
 exports.Weather = Weather;
 
-Weather.prototype.commands = {
+/*Weather.prototype.commands = {
 	'weather': 'current',
 	'forecast': 'forecast'
-};
+};*/
 
 Weather.prototype.current = function (location) {
 	var promise = new task.Promise();

@@ -1,6 +1,10 @@
-var http = require('http');
-var url = require('url');
+var http = require('http'),
+    url = require('url'),
+    w = require('./plugins/weather.js');
 var data;
+
+var weather = Weather();
+var def = Definitions();
 
 function chat(res, d) {
 	data = d;
@@ -8,15 +12,19 @@ function chat(res, d) {
 		var msg = getQuery('msg');
 		switch(msg) {
 		case "weather":
-			res.end("Hi, what's your name?");break;
+			res.end(weather.current("Washington, DC"));break;
 		case "forcast":
-			res.end("Cool name!\nHow old are you?");break;
+			res.end(weather.forecast("Washington, DC"));break;
 		case "def":
-			res.end("Aren't we a bit young? ;)");break;
+			res.end(def.define("Google"));break;
 		case "definition":
-			res.end("Details Sent:\n"+getValue(0)+"\n"+getValue(1)+"\n"+getValue(2)+"\n"+getValue(3)+"\nI'm currently dumb");break;
+			res.end(def.define("Google"));break;
+		case "define":
+			res.end(def.define("Google"));break;
 		case "bye":
 			res.end("Goodbye!");http.close();break;
+		case default:
+			res.end("Usage:\nweather <location>\nforcast <location>\n
 		}
 	} else {
 		res.end("botkey invalid");
