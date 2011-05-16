@@ -1,9 +1,0 @@
-module.exports = {
-	'username': 'you@jabber.company.com',
-	'password': 'sekret',
-	'room': 'nerd@conference.jabber.company.com',
-	'nick' : 'bert',
-	'tasks': {
-		'QueueManager': './queue-manager'
-	}
-}
