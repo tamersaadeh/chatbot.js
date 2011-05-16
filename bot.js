@@ -23,7 +23,7 @@ function chat(res, d) {
 		case "define":
 			res.end(def.define("Google"));break;
 		case "bye":
-			res.end("Goodbye!");http.close();break;
+			res.end("Goodbye!");break;
 		default:
 			res.end("Usage:\nweather <location>\nforcast <location>\ndefine/def/definition <word>\n****");
 		}
