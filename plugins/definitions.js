@@ -33,4 +33,4 @@ Definitions.prototype.define = function(from, content) {
 		});
 		request.end();
 	}
-});
+};

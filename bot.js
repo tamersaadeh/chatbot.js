@@ -1,10 +1,11 @@
 var http = require('http'),
     url = require('url'),
-    w = require('./plugins/weather.js');
+    w = require('./plugins/weather.js'),
+    d = require('./plugins/definitions.js');
 var data;
 
-var weather = Weather();
-var def = Definitions();
+var weather = w;
+var def = d;
 
 function chat(res, d) {
 	data = d;
