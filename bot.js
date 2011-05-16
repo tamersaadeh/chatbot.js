@@ -23,8 +23,8 @@ function chat(res, d) {
 			res.end(def.define("Google"));break;
 		case "bye":
 			res.end("Goodbye!");http.close();break;
-		case default:
-			res.end("Usage:\nweather <location>\nforcast <location>\n
+		default:
+			res.end("Usage:\nweather <location>\nforcast <location>\ndefine/def/definition <word>\n****");
 		}
 	} else {
 		res.end("botkey invalid");
